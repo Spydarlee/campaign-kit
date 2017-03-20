@@ -7,7 +7,9 @@ class Email
   field :from_name, :type => String  
   field :from_email, :type => String
   field :from_address1, :type => String
+  field :from_city, :type => String
   field :from_postcode, :type => String
+  field :from_country, :type => String
   field :message_id, :type => String
   
   belongs_to :decision
