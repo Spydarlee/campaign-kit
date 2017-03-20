@@ -9,7 +9,7 @@ class Email
   field :from_address1, :type => String
   field :from_city, :type => String
   field :from_postcode, :type => String
-  field :from_country, :type => String
+  field :from_country, :type => String, default: 'United Kingdom'
   field :message_id, :type => String
   
   belongs_to :decision
@@ -69,7 +69,7 @@ class Email
   def post_user_info
     if ENV['POST_ENDPOINT']
       agent = Mechanize.new
-      agent.post ENV['POST_ENDPOINT'], {account: {name: from_name, email: from_email, city: from_city, postcode: from_postcode, country: 'United Kingdom', source: "#{ENV['DOMAIN']}:#{decision.campaign.slug}"}}
+      agent.post ENV['POST_ENDPOINT'], {account: {name: from_name, email: from_email, city: from_city, postcode: from_postcode, country: from_country, source: "#{ENV['DOMAIN']}:#{decision.campaign.slug}"}}
     end
   end
   
